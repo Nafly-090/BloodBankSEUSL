@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search for Blood Donors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #dc3545;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .container h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .results h3 {
+            color: #333;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #343a40;
+            color: white;
+            margin-top: 20px;
+        }
+        .donor-item {
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Find a Blood Donor</h1>
+</div>
+
+<div class="container">
+    <h2>Search for Donors</h2>
+    <form id="searchForm" onsubmit="return searchDonors(event)">
+        <label for="bloodGroup">Select Blood Group:</label>
+        <select id="bloodGroup" name="bloodGroup" required>
+            <option value="">Select Blood Group</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+        </select>
+
+        <label for="location">Enter Location:</label>
+        <input type="text" id="location" name="location" placeholder="Enter your location" >
+
+        <button type="submit">Search Donors</button>
+    </form>
+
+    <div class="results">
+        <h3>Donors in Your Area:</h3>
+        <div id="donorResults">
+            <!-- List of donors (to be generated dynamically) -->
+            <p>No results found.</p>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 Blood Bank. All Rights Reserved.</p>
+</div>
+
+<script>
+    function searchDonors(event) {
+        event.preventDefault(); // Prevent form submission
+
+        const bloodGroup = document.getElementById('bloodGroup').value;
+        const location = document.getElementById('location').value.toLowerCase();
+        const donorResults = document.getElementById('donorResults');
+
+        // Clear previous results
+        donorResults.innerHTML = '';
+
+        // Get donors from localStorage
+        const donors = JSON.parse(localStorage.getItem('donors')) || [];
+
+        // Filter donors based on blood group and location
+        const filteredDonors = donors.filter(donor => 
+            donor.bloodGroup === bloodGroup && donor.location.toLowerCase().includes(location)
+        );
+
+        // Display results
+        if (filteredDonors.length > 0) {
+            filteredDonors.forEach(donor => {
+                const donorItem = document.createElement('div');
+                donorItem.classList.add('donor-item');
+                donorItem.innerHTML = `
+                    <strong>Name:</strong> ${donor.name}<br>
+                    <strong>Blood Group:</strong> ${donor.bloodGroup}<br>
+                    <strong>Phone:</strong> ${donor.phone}<br>
+                    <strong>Location:</strong> ${donor.location}
+                `;
+                donorResults.appendChild(donorItem);
+            });
+        } else {
+            donorResults.innerHTML = '<p>No results found.</p>';
+        }
+    }
+</script>
+
+</body>
+</html>
