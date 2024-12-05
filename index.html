@@ -4,235 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blood Bank - Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
-        }
-        .header {
-            background-color: #dc3545;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 36px;
-        }
-        .nav {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 18px;
-            color: #007bff;
-            transition: color 0.3s;
-        }
-        .nav a:hover {
-            color: #0056b3;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        .container h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .container p {
-            font-size: 18px;
-            line-height: 1.6;
-            text-align: justify;
-            color: #555;
-        }
-        .footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #343a40;
-            color: white;
-            margin-top: 20px;
-        }
-        .donor-list {
-            margin-top: 20px;
-            border-top: 1px solid #ccc;
-            padding-top: 20px;
-        }
-        .donor-item {
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-            position: relative;
-            transition: transform 0.3s;
-        }
-        .donor-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        .button {
-            margin-top: 10px;
-        }
-        .button button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .button button:hover {
-            background-color: #0056b3;
-        }
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.6);
-            padding-top: 60px;
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .modal form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px; /* Space between form fields */
-        }
-        .modal form label {
-            font-weight: 700;
-        }
-        .modal form input,
-        .modal form select {
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px; /* Increase font size */
-            transition: border-color 0.3s; /* Smooth border color transition */
-        }
-        .modal form input:focus,
-        .modal form select:focus {
-            border-color: #007bff; /* Highlight border on focus */
-            outline: none; /* Remove default outline */
-        }
-        .modal form button {
-            margin-top: 15px;
-            background-color: #dc3545;
-            border: none;
-            color: white;
-            padding: 12px 0; /* Increase padding */
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 16px; /* Increase button font size */
-        }
-        .modal form button:hover {
-            background-color: #c82333;
-        }
-        /* Confirmation Modal */
-        .confirm-modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding-top: 60px;
-        }
-        .confirm-modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 400px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-        .confirm-modal-content h2 {
-            margin: 0 0 10px 0;
-            color: #dc3545;
-        }
-        .confirm-modal-content p {
-            margin: 0 0 20px 0;
-            color: #555;
-        }
-        .confirm-modal-content button {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .confirm-modal-content button#confirmDelete {
-            background-color: #dc3545;
-            color: white;
-        }
-        .confirm-modal-content button#confirmDelete:hover {
-            background-color: #c82333;
-        }
-        .confirm-modal-content button#cancelDelete {
-            background-color: #007bff;
-            color: white;
-        }
-        .confirm-modal-content button#cancelDelete:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
 <body>
 
-<div class="header">
-    <h1>Welcome to Blood Bank</h1>
-</div>
+    <div class="bg-red-600 text-white py-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <!-- Logo Section -->
+            <div class="flex items-center space-x-2">
+                <img src="your-logo.png" alt="Blood Bank Logo" class="w-10 h-10">
+                <h1 class="text-3xl font-bold">Blood Bank</h1>
+            </div>
+            
+            <!-- Navbar Section -->
+            <nav class="space-x-6 hidden md:flex items-center">
+                <div class="flex items-center space-x-6">
+                    <!-- Search Box -->
+                    <div class="relative">
+                        <input type="text" class="py-2 px-12 rounded-full text-black focus:outline-none" placeholder="Search Blood..." />
+                        <button class="absolute right-2 top-2 text-gray-600">
+                            <i class="fas fa-search"></i> 
+                            <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 -960 960 960" width="25px" fill="#999999">
+                                <path d="M765-144 526-383q-30 22-65.79 34.5-35.79 12.5-76.18 12.5Q284-336 214-406t-70-170q0-100 70-170t170-70q100 0 170 70t70 170.03q0 40.39-12.5 76.18Q599-464 577-434l239 239-51 51ZM384-408q70 0 119-49t49-119q0-70-49-119t-119-49q-70 0-119 49t-49 119q0 70 49 119t119 49Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <a href="register.html" class="rounded-md text-lg text-white-500 hover:text-black hover:bg-white transition duration-300">Register Donor</a>
+                    <a href="about.html" class="rounded-md text-lg text-white-500 hover:text-black transition duration-300">About Us</a>
+                    <a href="contact.html" class="rounded-md text-lg text-white-500 hover:text-black transition duration-300">Contact Us</a>
+    
+                    <!-- Dropdown Menu for Desktop (Hidden by Default) -->
+                    <div class="relative">
+                        <button id="dropdownButton" class=" rounded-md text-lg text-white-500 hover:text-black transition duration-300 pt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#FFFFFF"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
 
-<div class="nav">
-    <a href="register.html">Register as a Donor</a>
-    <a href="search.html">Find Blood</a>
-    <a href="about.html">About Us</a>
-    <a href="contact.html">Contact Us</a>
-</div>
-
+                        </button>
+                        <div id="dropdownMenu" class="rounded-md absolute right-0 hidden bg-white text-black rounded-md shadow-lg mt-2 w-40">
+                            <a href="services.html" class=" rounded-md block px-4 py-2 text-sm hover:bg-gray-100">Services</a>
+                            <a href="news.html" class="rounded-md block px-4 py-2 text-sm hover:bg-gray-100">News</a>
+                            <a href="events.html" class="rounded-md block px-4 py-2 text-sm hover:bg-gray-100">Events</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Mobile Icon Menu (Hamburger) -->
+            <div class="md:hidden flex items-center">
+                <button class="text-white focus:outline-none" id="hamburgerIcon" onclick="toggleMenu()">
+                    <div class="space-y-2">
+                        <div class="w-8 h-1 bg-white"></div>
+                        <div class="w-8 h-1 bg-white"></div>
+                        <div class="w-8 h-1 bg-white"></div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mobile Dropdown Menu (Hidden by Default) -->
+    <div id="mobileMenu" class="md:hidden bg-red-600 text-white py-4 hidden">
+        <a href="register.html" class="block text-lg text-white-500 hover:text-blue-700 transition duration-300 px-4 py-2">Register as a Donor</a>
+        <a href="search.html" class="block text-lg text-white-500 hover:text-blue-700 transition duration-300 px-4 py-2">Find Blood</a>
+        <a href="about.html" class="block text-lg text-white-500 hover:text-blue-700 transition duration-300 px-4 py-2">About Us</a>
+        <a href="contact.html" class="block text-lg text-white-500 hover:text-blue-700 transition duration-300 px-4 py-2">Contact Us</a>
+       
+        <a href="services.html" class="block px-4 py-2 text-sm hover:bg-gray-100">Services</a>
+        <a href="news.html" class="block px-4 py-2 text-sm hover:bg-gray-100">News</a>
+        <a href="events.html" class="block px-4 py-2 text-sm hover:bg-gray-100">Events</a>
+        
+        
+    </div>
+    
+    <script>
+        // Toggle the dropdown menu for desktop
+        const dropdownButton = document.getElementById('dropdownButton');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        dropdownButton.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('hidden');
+        });
+    
+        // Toggle the mobile dropdown menu
+        const mobileDropdownButton = document.getElementById('mobileDropdownButton');
+        const mobileDropdownMenu = document.getElementById('mobileDropdownMenu');
+        function toggleMobileDropdown() {
+            mobileDropdownMenu.classList.toggle('hidden');
+        }
+    
+        // Toggle the mobile menu
+        function toggleMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+    </script>
+    
+    
 <div class="container">
     <h2>Our Mission</h2>
     <p>
@@ -245,7 +112,9 @@
         By registering as a donor, you can make a difference in someone's life. Every drop of blood counts, and your contribution
         can save lives. Join us in this mission and help ensure that no one faces a blood shortage in times of need.
     </p>
+</div>
 
+<div class="container">
     <div class="donor-list" id="donorList">
         <h2>Registered Donors</h2>
     </div>
